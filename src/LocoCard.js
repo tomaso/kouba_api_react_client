@@ -14,6 +14,7 @@ import LightIcon from '@mui/icons-material/Light';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -39,9 +40,25 @@ interface ExpandMoreProps extends IconButtonProps {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         };
-        fetch('http://172.17.0.16:8001/loco_light/'+inputProps.dcc_id, requestOptions)
-            .then(response => response.json())
+        fetch(
+            'http://172.17.0.16:8001/loco_light/'+inputProps.dcc_id+'/'+(!locoLight ? 255 : 0),
+            requestOptions
+        )
+        .then(response => response.json())
     }
+
+    function executeShortDCCCmd(cmd_number, value) {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(
+            'http://172.17.0.16:8001/loco_dcc/'+inputProps.dcc_id+'/'+cmd_number+'/'+value,
+            requestOptions
+        )
+        .then(response => response.json())
+    }
+
 
     const handleExpandClick = () => {
       setExpanded(!expanded);
@@ -50,7 +67,12 @@ interface ExpandMoreProps extends IconButtonProps {
     const handleLocoLightClick = () => {
         setLocoLight(!locoLight);
         callLocoLightApi();
-      };
+    };
+
+    const handleHornClick = () => {
+        executeShortDCCCmd(12,1);
+        executeShortDCCCmd(12,0);
+    };
   
     return (
         <Card variant="outlined" sx={{ minWidth: 345, maxWidth: 345 }}>
@@ -81,6 +103,9 @@ interface ExpandMoreProps extends IconButtonProps {
           <CardActions disableSpacing>
             <IconButton aria-label="switch lights" onClick={handleLocoLightClick}>
             <LightIcon color={locoLight ? "success" : "action"}/>
+            </IconButton>
+            <IconButton aria-label="horn" onClick={handleHornClick}>
+            <VolumeUpIcon/>
             </IconButton>
             <ExpandMore
               expand={expanded}
