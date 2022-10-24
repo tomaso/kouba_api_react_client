@@ -6,67 +6,35 @@ import '@fontsource/roboto/700.css';
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import RB from './Rb';
+import LocoCard from './LocoCard'
 
 import './App.css';
 
-function callApi(item, r, g, b) {
-  const requestOptions = {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ r: r, g: g, b: b })
-  };
-  fetch('http://172.17.0.1:8001/neopixel/'+item, requestOptions)
-    .then(response => response.json())
-}
 
 function App() {
   return (
     <>
-    <RB item="0"/>
-    <RB item="1"/>
-    <RB item="2"/>
-    <RB item="3"/>
-    <RB item="4"/>
-    <RB item="5"/>
-    <RB item="6"/>
-    <RB item="7"/>
-    <RB item="8"/>
-    <RB item="9"/>
-    <RB item="10"/>
-    <RB item="11"/>
-    <RB item="12"/>
-    <RB item="13"/>
-    <RB item="14"/>
-    <RB item="15"/>
-    <RB item="16"/>
-    <RB item="17"/>
-    <RB item="18"/>
-    <RB item="19"/>
-    <RB item="20"/>
-    <RB item="21"/>
-    <RB item="22"/>
+      <LocoCard 
+        dcc_id="3" 
+        loco_img="/loco_114_298-3.jpg" 
+        loco_title="Dieselová lokomotiva řady 114 Deutsche Reichsbahn" 
+        loco_details="Původní řada 110 byla vyvinuta pro osobní a nákladní vlakovou dopravu a jako 
+        varianta pro použití v posunovacích službách pro DR. Maximální rychlost byla 
+        100 km / h s výkonem 1 000 koní. V letech 1983 až 1991 byly do některých 
+        strojů instalovány nové motory s nominálním výkonem 1 500 koní a překresleny 
+        jako BR 114."
+      />
+      <LocoCard 
+        dcc_id="4" 
+        loco_img="/loco_br_170.jpg" 
+        loco_title="el. lokomotiva BR 170 DB-AG Polska"
+        loco_details="Varianta lokomotivy Vectron pro DB Schenker Rail Polska 
+        je určena pro provoz v polské stejnosměrné síti a je vybavena příslušným 
+        vlakovým zabezpečovacím zařízením.
+        " 
+      />
    </>
   );
 }
-
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <div>
-//         <span>0 - </span>
-//         <button style={{backgroundColor: "red"}} onClick={() => callApi(0, 255, 0, 0)}>&nbsp;</button>
-//         <button style={{backgroundColor: "green"}} onClick={() => callApi(0, 0, 255, 0)}>&nbsp;</button>
-//         <button style={{backgroundColor: "blue"}}onClick={() => callApi(0, 0, 0, 255)}>&nbsp;</button>
-//       </div>
-//       <div>
-//         <span>1 - </span>
-//         <button style={{backgroundColor: "red"}} onClick={() => callApi(1, 255, 0, 0)}>&nbsp;</button>
-//         <button style={{backgroundColor: "green"}} onClick={() => callApi(1, 0, 255, 0)}>&nbsp;</button>
-//         <button style={{backgroundColor: "blue"}}onClick={() => callApi(1, 0, 0, 255)}>&nbsp;</button>
-//       </div>
-//     </div>
-//   );
-// }
 
 export default App;
