@@ -41,7 +41,7 @@ interface ExpandMoreProps extends IconButtonProps {
             headers: { 'Content-Type': 'application/json' },
         };
         fetch(
-            'http://172.17.0.16:8001/loco_light/'+inputProps.dcc_id+'/'+(!locoLight ? 255 : 0),
+            'http://172.17.0.16:8001/trains/light/'+inputProps.dcc_id+'/'+(!locoLight ? 255 : 0),
             requestOptions
         )
         .then(response => response.json())
@@ -53,7 +53,7 @@ interface ExpandMoreProps extends IconButtonProps {
             headers: { 'Content-Type': 'application/json' },
         };
         fetch(
-            'http://172.17.0.16:8001/loco_dcc/'+inputProps.dcc_id+'/'+cmd_number+'/'+value,
+            'http://172.17.0.16:8001/trains/dcc/'+inputProps.dcc_id+'/'+cmd_number+'/'+value,
             requestOptions
         )
         .then(response => response.json())
